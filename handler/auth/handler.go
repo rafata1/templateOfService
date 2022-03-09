@@ -1,19 +1,29 @@
 package auth
 
 import (
+    "fmt"
     "github.com/gin-gonic/gin"
     "net/http"
 )
 
-// Check ...
-// @Summary check api
-// @Description check integrating swagger
-// @Tags Authentication
-// @Accept json
-// @Success 200
-// @Router /api/v1/auth/temp [get]
-func Check(c *gin.Context) {
+// Signup ...
+//// @Tags         Authentication
+//// @Accept       json
+//// @Produce      json
+//// @Param          {object} SignupReq
+//// @Success      200  {object}  BaseRes
+//// @Router       /api/v1/auth/signup [post]
+func Signup(c *gin.Context) {
+    var req SignupReq
+    err := c.BindJSON(&req)
+    if err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{
+            "message": "message format is invalid",
+        })
+        return
+    }
+    fmt.Println(req)
     c.JSON(http.StatusOK, gin.H{
-        "data": "ok",
+        "message": "received",
     })
 }

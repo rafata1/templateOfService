@@ -11,7 +11,7 @@ func SetupRouter() *gin.Engine {
     {
         auth := apiV1.Group("/auth")
         {
-            auth.GET("/temp", authHandler.Check)
+            auth.POST("/signup", authHandler.Signup)
         }
     }
     return router
