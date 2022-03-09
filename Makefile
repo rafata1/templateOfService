@@ -1,2 +1,5 @@
 run:
-	go run cmd/main.go
+	go run main.go
+
+generate-api-docs:
+	swag init

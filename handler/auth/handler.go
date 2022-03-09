@@ -5,16 +5,15 @@ import (
     "net/http"
 )
 
-// @BasePath /api/v1/auth
-
-// Signup godoc
-// @Description signup api
+// Check ...
+// @Summary check api
+// @Description check integrating swagger
+// @Tags Authentication
 // @Accept json
-// @Produce json
-// @Router /signup [get]
-func SignUp(c *gin.Context) {
+// @Success 200
+// @Router /api/v1/auth/temp [get]
+func Check(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{
-        "message": "signed up",
+        "data": "ok",
     })
-    return
 }
