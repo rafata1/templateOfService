@@ -1,0 +1,47 @@
+basePath: /
+definitions:
+  auth.BaseRes:
+    properties:
+      code:
+        type: string
+      data: {}
+      message:
+        type: string
+    type: object
+  auth.SignupReq:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: User API documentation
+paths:
+  /api/v1/auth/signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Signup
+        in: body
+        name: signupRequest
+        required: true
+        schema:
+          $ref: '#/definitions/auth.SignupReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.BaseRes'
+      summary: Register an account
+      tags:
+      - Authentication
+swagger: "2.0"
