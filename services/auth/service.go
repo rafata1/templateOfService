@@ -17,7 +17,7 @@ func NewService() *Service {
 func (s *Service) Signup(user models.User) string {
     err := s.repo.InsertUser(user)
     if err != nil {
-        return "Error querying into DB"
+        return ErrInternal
     }
-    return "Success"
+    return SuccessMessage
 }
