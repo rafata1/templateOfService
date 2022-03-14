@@ -9,8 +9,8 @@ import (
 )
 
 func SetupRouter() {
-    authHandler := auth.NewHandler()
     router := gin.Default()
+    authHandler := auth.NewHandler()
     apiV1 := router.Group("/api/v1")
     {
         authRouter := apiV1.Group("/auth")
