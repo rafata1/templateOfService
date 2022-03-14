@@ -2,19 +2,18 @@ package auth
 
 import (
     "github.com/gin-gonic/gin"
-    "github.com/templateOfService/model"
-    "github.com/templateOfService/service/auth"
+    "github.com/templateOfService/models"
     "net/http"
     "strings"
 )
 
 type Handler struct {
-    service *auth.Service
+    service *Service
 }
 
 func NewHandler() *Handler {
     return &Handler{
-        service: auth.NewService(),
+        service: NewService(),
     }
 }
 
@@ -31,7 +30,7 @@ func (h *Handler) Signup(c *gin.Context) {
     err := c.BindJSON(&req)
     if err != nil {
         c.JSON(http.StatusBadRequest, BaseRes{
-            Message: "request format is not correct",
+            Message: "request's format is not correct",
         })
         return
     }
@@ -43,8 +42,8 @@ func (h *Handler) Signup(c *gin.Context) {
     c.JSON(http.StatusOK, res)
 }
 
-func transformSignupRequestToUserModel(req SignupReq) model.User {
-    return model.User{
+func transformSignupRequestToUserModel(req SignupReq) models.User {
+    return models.User{
         Username: strings.TrimSpace(req.Username),
         Email:    strings.TrimSpace(req.Email),
         Password: strings.TrimSpace(req.Password),

@@ -3,8 +3,7 @@ package main
 import (
     "github.com/joho/godotenv"
     _ "github.com/templateOfService/docs"
-    "github.com/templateOfService/handler"
-    "github.com/templateOfService/repo"
+    "github.com/templateOfService/route"
     "log"
 )
 
@@ -13,8 +12,12 @@ import (
 func main() {
     err := godotenv.Load()
     if err != nil {
-        log.Fatal("Error loading env")
+        log.Fatalf("Error loading env: %s", err.Error())
     }
-    handler.SetupRouter()
-    repo.SetupDB()
+
+    router := route.InitRouter()
+    err = router.Run()
+    if err != nil {
+        log.Fatalf("Error starting server: %s", err.Error())
+    }
 }
