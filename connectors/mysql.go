@@ -8,7 +8,7 @@ import (
 
 var conn *sqlx.DB
 
-func ConnectMySQL() *sqlx.DB {
+func GetMySQLInstance() *sqlx.DB {
     if conn == nil {
         var err error
         conn, err = sqlx.Connect("mysql", os.Getenv("MYSQL"))

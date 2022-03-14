@@ -14,7 +14,7 @@ type Repo struct {
 
 func NewRepo() *Repo {
     return &Repo{
-        conn: connectors.ConnectMySQL(),
+        conn: connectors.GetMySQLInstance(),
     }
 }
 
