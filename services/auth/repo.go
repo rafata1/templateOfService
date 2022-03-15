@@ -3,7 +3,7 @@ package auth
 import (
     _ "github.com/go-sql-driver/mysql"
     "github.com/jmoiron/sqlx"
-    "github.com/templateOfService/connectors"
+    "github.com/templateOfService/connectors/mysql"
     "github.com/templateOfService/models"
     "log"
 )
@@ -14,7 +14,7 @@ type Repo struct {
 
 func NewRepo() *Repo {
     return &Repo{
-        conn: connectors.GetMySQLInstance(),
+        conn: mysql.GetMySQLInstance(),
     }
 }
 

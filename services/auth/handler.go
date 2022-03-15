@@ -30,7 +30,7 @@ func (h *Handler) Signup(c *gin.Context) {
     err := c.BindJSON(&req)
     if err != nil {
         c.JSON(http.StatusBadRequest, BaseRes{
-            Message: "request's format is not correct",
+            Message: err.Error(),
         })
         return
     }
