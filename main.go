@@ -1,12 +1,23 @@
 package main
 
 import (
+    "github.com/gin-gonic/gin"
     "github.com/joho/godotenv"
+    ginSwagger "github.com/swaggo/gin-swagger"
+    "github.com/swaggo/gin-swagger/swaggerFiles"
     "github.com/templateOfService/connectors/mysql"
     _ "github.com/templateOfService/docs"
-    "github.com/templateOfService/route"
+    "github.com/templateOfService/services/auth"
     "log"
 )
+
+func initRouter() *gin.Engine {
+    router := gin.Default()
+    authHandler := auth.NewHandler()
+    router.POST("/api/v1/auth/signup", authHandler.Signup)
+    router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+    return router
+}
 
 // @title User API documentation
 // @BasePath /
@@ -21,7 +32,7 @@ func main() {
         log.Fatalf("Error connecting to mysql: %s", err.Error())
     }
 
-    router := route.InitRouter()
+    router := initRouter()
     err = router.Run()
     if err != nil {
         log.Fatalf("Error starting server: %s", err.Error())
