@@ -5,23 +5,14 @@ import (
     "os"
 )
 
-type MySQL struct {
-    conn *sqlx.DB
-    url  string
-}
-
-var mysql *MySQL
+var conn *sqlx.DB
 
 func Connect() error {
-    url := os.Getenv("MYSQL")
-    conn, err := sqlx.Connect("mysql", url)
-    mysql = &MySQL{
-        conn: conn,
-        url:  url,
-    }
+    var err error
+    conn, err = sqlx.Connect("mysql", os.Getenv("MYSQL"))
     return err
 }
 
 func GetMySQLInstance() *sqlx.DB {
-    return mysql.conn
+    return conn
 }
